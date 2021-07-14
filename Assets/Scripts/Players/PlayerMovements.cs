@@ -111,11 +111,11 @@ public class PlayerMovements : MonoBehaviour {
     // Physics.Raycast(transform.position + Vector3.down * ( cc.height / 2 - cc.center.y ), Vector3.down, out hit, 0.1f, -1, QueryTriggerInteraction.Ignore);
 
     // Physics.SphereCast(transform.position + Vector3.down * ( cc.height / 2 - cc.center.y ), cc.radius / 2, Vector3.down, out hit, maxDistanceCheck, -1, QueryTriggerInteraction.Ignore);
-    return Physics.SphereCast(transform.position, cc.radius, Vector3.down, out hit, ( cc.height / 2 - cc.center.y ) + maxDistanceCheck, -1, QueryTriggerInteraction.Ignore);
+    return Physics.SphereCast(transform.position, cc.radius / 2, Vector3.down, out hit, ( cc.height / 2 - cc.center.y ) + maxDistanceCheck, -1, QueryTriggerInteraction.Ignore);
   }
 
   private void OnDrawGizmos () {
-    Gizmos.DrawWireSphere(transform.position + Vector3.down * ( cc.height / 2 - cc.center.y ), cc.radius);
+    Gizmos.DrawWireSphere(transform.position + Vector3.down * ( cc.height / 2 - cc.center.y ), cc.radius / 2);
   }
 
   void Jump () {

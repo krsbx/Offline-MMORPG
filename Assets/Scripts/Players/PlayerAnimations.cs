@@ -35,6 +35,15 @@ public class PlayerAnimations : MonoBehaviour {
       attackCounter = 1;
       attackReseter = 0f;
     }
+
+    AnimatorStateInfo animatorStateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+
+    bool isDodging = animatorStateInfo.IsName("Dodge");
+
+    if (!isDodging) {
+      cc.center = new Vector3(0f, 0.5f, 0f);
+      cc.height = 3f;
+    }
   }
 
   void SubscribeMethod () {
@@ -51,6 +60,9 @@ public class PlayerAnimations : MonoBehaviour {
     dodgeButton.started += _ => {
       if (Runnable && isGrounded) {
         playerAnimator.Play("Dodge", 0);
+
+        cc.center = new Vector3(0f, 0f, 0f);
+        cc.height = 1f;
       }
     };
   }
@@ -63,6 +75,10 @@ public class PlayerAnimations : MonoBehaviour {
     get {
       return isMoving && isRunning;
     }
+  }
+
+  CharacterController cc {
+    get { return movementController.cc; }
   }
 
   bool isRunning {
